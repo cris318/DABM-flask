@@ -21,9 +21,12 @@ def validar():
         password=request.form['password']
 
         resultado=verificar(usuario,password)
-        return render_template('menu.html',title='Sistema DABM')
-
+        if resultado ==True:
+            return render_template('menu.html',title='Sistema DABM')
+        else:
+            return render_template('login.html')
         #return usuario +";"+ password
+
 @app.route('/monitor')
 def monitor():
     #consultar archivo de parametros
@@ -35,8 +38,27 @@ def monitor():
     return render_template("/monitor.html",datos=datos,lectura=lectura)
         
 def verificar(usuario,password):
-    #usuario no exite,contraseña correcta,bienvenido
-    return True
+    directorio=os.path.dirname(__file__)        #se abre y lee el archivo de texto de "users.cvs"
+    nombrearchivo="bd/users.csv"
+    ruta=os.path.join(directorio,nombrearchivo)
+
+    f= open(ruta,"r")
+    lineas=f.readlines()        #leemos las lineas del archivo de texto
+    f.close()
+    datos=[]                    #lista donde vamos a almacenar cada fila del  archivo de texto
+    for l in lineas:
+        l=l.replace("\n","")
+        l=l.split(";")
+        datos.append(l)
+        #print(l)
+    for d in datos:
+        if ((d[0]==usuario) & (d[1]==password)):
+            return True
+        #usuario no exite,contraseña correcta,bienvenido
+   
+
+
+
 
 def getDatos():
     directorio=os.path.dirname(__file__)
