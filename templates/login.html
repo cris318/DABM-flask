@@ -1,47 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset= "UTF-8">
+    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ingreso al sistema</title>
-    <style>
-        body{
-            background-color: lightblue;
+    <link rel="stylesheet" href="{{ url_for('static',filename='estilos.css') }}"> <!--importacion de archivo de estilos.css-->
+    <script>
+        function boton(){
+            //alert("boton pulsadp")
+            usuario=document.getElementById("usuario").value;
+            //alert(usuario)
+            password=document.getElementById("password").value;
+            //alert(password)
+            if ((usuario=="") || (password=="")){
+                alert("Ingrese todos los valores");
+            }
+            else{
+                document.getElementById("formLogin").submit();
+            }
         }
-        #login{
-            border-style: solid;
-            border-color: black;
-            border-width: thin;
-            padding: 10px;
-            width: 400px;
-            font-family: 'Courier New', Courier, monospace;
-            position: absolute;
-            left: 35%;
-            top: 30%;
-            text-align: center;
-        }
-        .boton{
-            background-color: yellow;
-        }
-        .parrafo{
-            font-size: 18px;
-        }
-    </style>
+    </script>
 </head>
 <body>
     <div id="login">
-        <form action="/validar" method="post">
-            <img alt="Logo Escuela" class="ag-branding__img" height="147" src="https://escuelaing.s3.amazonaws.com/staging/images/logo-ecijg.width-380.png?AWSAccessKeyId=AKIAWFY3NGTFBJGCIWME&amp;Signature=C%2BBrM2TjbnUAse6%2FTkfIPKvgY98%3D&amp;Expires=1636470203" width="380">
+        <form action="/validar" method="post" id="formLogin">
+            <img alt="Logo Escuela" height="147" src="https://escuelaing.s3.amazonaws.com/staging/images/logo-ecijg.width-380.png?AWSAccessKeyId=AKIAWFY3NGTFBJGCIWME&amp;Signature=C%2BBrM2TjbnUAse6%2FTkfIPKvgY98%3D&amp;Expires=1636470203" width="380">
             
-            <p class="parrafo">Usuario  : <input type="text" name="usuario"></p>
-            <p class="parrafo">Contraseña : <input type="password" name="password"></p>
-            <p><input type="submit" class="boton" value="Ingresar"></p>
+            <p class="parrafo">Usuario  : <input type="text" name="usuario" id="usuario"></p>
+            <p class="parrafo">Contraseña : <input type="password" name="password" id="password"></p>
+            <p><input type="button" class="boton" value="Ingresar" onclick="boton()"></p>
         </form>
     </div>
 
 </body>
-
-
-
 </html>
