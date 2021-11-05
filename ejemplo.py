@@ -1,7 +1,9 @@
-from flask import Flask,render_template,request
+from flask import Flask,render_template,request,redirect
 from flask.globals import request
 import os
 import random
+
+from flask.helpers import locked_cached_property
 
 app = Flask(__name__)
 
@@ -14,28 +16,36 @@ def datos():
     user= {'nombre' : 'Cristian'}
     return render_template('datos.html',title='Titulo Personalizado',user=user)
 
-@app.route('/validar',methods=["POST"])
+@app.route('/menu',methods=["POST"])
 def validar():
     if request.method=="POST":
         usuario=request.form['usuario']
         password=request.form['password']
-
+        resultado=True
         resultado=verificar(usuario,password)
         if resultado ==True:
             return render_template('menu.html',title='Sistema DABM')
         else:
-            return render_template('login.html')
-        #return usuario +";"+ password
+            resultado=False
+            return redirect("/")
+   
 
 @app.route('/monitor')
 def monitor():
     #consultar archivo de parametros
     datos=getDatos()
-    #print(datos)
     # obtener lectura
     lectura=random.randint(0,45)
     # enviar a la interfaz
-    return render_template("/monitor.html",datos=datos,lectura=lectura)
+    color=0
+    if lectura >= int(datos[0][1]) and lectura <= int(datos[0][2]):
+        color=1 
+    if lectura >= int(datos[1][1]) and lectura <= int(datos[1][2]):
+        color=2 
+    if lectura>= int(datos[2][1]) and lectura <= int(datos[2][2]):
+        color=3
+
+    return render_template("/monitor.html",datos=datos,lectura=lectura,color=color)
         
 def verificar(usuario,password):
     directorio=os.path.dirname(__file__)        #se abre y lee el archivo de texto de "users.cvs"
@@ -50,15 +60,10 @@ def verificar(usuario,password):
         l=l.replace("\n","")
         l=l.split(";")
         datos.append(l)
-        #print(l)
+
     for d in datos:
-        if ((d[0]==usuario) & (d[1]==password)):
+        if ((d[0]==usuario) and (d[1]==password)):
             return True
-        #usuario no exite,contraseña correcta,bienvenido
-   
-
-
-
 
 def getDatos():
     directorio=os.path.dirname(__file__)
@@ -74,5 +79,11 @@ def getDatos():
         l=l.split(";")
         datos.append(l)
     return datos
+        
+@app.route("/config")
+def config():
+    return render_template("config.html")
+
+
 if __name__=="__main__":
     app.run(debug=True)

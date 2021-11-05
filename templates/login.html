@@ -8,23 +8,26 @@
     <link rel="stylesheet" href="{{ url_for('static',filename='estilos.css') }}"> <!--importacion de archivo de estilos.css-->
     <script>
         function boton(){
-            //alert("boton pulsadp")
             usuario=document.getElementById("usuario").value;
-            //alert(usuario)
             password=document.getElementById("password").value;
-            //alert(password)
             if ((usuario=="") || (password=="")){
-                alert("Ingrese todos los valores");
+                alert("Ingrese todos los valores");                
+            }
+            else if (({usuario}=="no") ||({password}=="no")){
+                alert("Documento o Contraseña Invalidos");
+                alert(usuario);
             }
             else{
                 document.getElementById("formLogin").submit();
             }
         }
+      
     </script>
+   
 </head>
 <body style="background-image: url('/static/fondo2.png')">
     <div id="login">
-        <form action="/validar" method="post" id="formLogin">
+        <form action="/menu" method="post" id="formLogin">
             <img alt="Logo Escuela" height="147" src="https://escuelaing.s3.amazonaws.com/staging/images/logo-ecijg.width-380.png?AWSAccessKeyId=AKIAWFY3NGTFBJGCIWME&amp;Signature=C%2BBrM2TjbnUAse6%2FTkfIPKvgY98%3D&amp;Expires=1636470203" width="380">
             
             <p class="parrafo">Usuario  : <input type="text" name="usuario" id="usuario"></p>
@@ -32,6 +35,5 @@
             <p><input type="button" class="boton" value="Ingresar" onclick="boton()"></p>
         </form>
     </div>
-
 </body>
 </html>
