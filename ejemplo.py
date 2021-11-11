@@ -28,8 +28,23 @@ def validar():
         else:
             resultado=False
             return redirect("/")
-   
 
+@app.route('/Rangos',methods=["POST"])   
+def Rango():
+    if request.method == "POST":
+        minHipo=request.form["minHipo"]
+        maxHipo=request.form["maxHipo"]
+        minNormal=request.form["minNormal"]
+        maxNormal=request.form["maxNormal"] 
+        minFiebre=request.form["minFiebre"]
+        maxFiebre=request.form["maxFiebre"]
+
+        print(minHipo)
+        print(maxHipo)
+        #cambiarRangos(minHipo,maxHipo,minNormal,maxNormal,minFiebre,maxFiebre)
+        return minHipo + ";" + maxHipo
+def cambiarRangos():
+    pass
 @app.route('/monitor')
 def monitor():
     #consultar archivo de parametros
@@ -65,6 +80,10 @@ def verificar(usuario,password):
         if ((d[0]==usuario) and (d[1]==password)):
             return True
 
+@app.route("/Rangos")
+def rangos():
+    pass
+    
 def getDatos():
     directorio=os.path.dirname(__file__)
     nombrearchivo="bd/parametros.csv"

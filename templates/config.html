@@ -18,36 +18,39 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <p><h4>PARAMETROS DE CONFIGURACION</h4></p>
-        <br>
-        <p>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Rango</th>
-                        <th>Minimo</th>
-                        <th>Maximo</th>
-                    </tr>
-                </thead>
-                <tbody>   
-                    <tr class="table-primary">
-                        <td>Hipotermia</td>
-                        <td><input type="number"></td>
-                        <td><input type="number"></td>
-                    </tr>
-                    <tr class="table-success">
-                        <td>Normal</td>
-                        <td><input type="number"></td>
-                        <td><input type="number"></td>
-                    </tr>
-                    <tr class="table-danger">
-                        <td>Fiebre</td>
-                        <td><input type="number"></td>
-                        <td><input type="number"></td>
-                    </tr>                
-                </tbody>
-            </table>
-        </p>
-    <p><button class="btn btn-primary" type="button">Guardar"</button></p>
+    <form action="/Rangos" method="post">
+        <p><h4>PARAMETROS DE CONFIGURACION</h4></p>
+            <br>
+            <p>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Rango</th>
+                            <th>Minimo</th>
+                            <th>Maximo</th>
+                        </tr>
+                    </thead>
+                    <tbody>   
+                        <tr class="table-primary">
+                            <td>Hipotermia</td>
+                            <td><input type="number" placeholder="valor minimo" name="minHipo"></td>
+                            <td><input type="number" placeholder="valor maximo" name="maxHipo"></td>
+                        </tr>
+                        <tr class="table-success">
+                            <td>Normal</td>
+                            <td><input type="number" placeholder="valor minimo" name="minNormal"></td>
+                            <td><input type="number" placeholder="valor maximo" name="maxNormal"></td>
+                        </tr>
+                        <tr class="table-danger">
+                            <td>Fiebre</td>
+                            <td><input type="number" placeholder="valor minimo" name="minFiebre"></td>
+                            <td><input type="number" placeholder="valor maximo" name="maxFiebre"></td>
+                        </tr>                
+                    </tbody>
+                </table>
+            </p>
+    
+        <p><button class="btn btn-primary" type="submit" id="boton" >Guardar</button></p>
+    </form>
 </body>
 </html>
