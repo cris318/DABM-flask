@@ -1,1 +1,1 @@
-web: gunicorn wsgi:appherok
+web: gunicorn wsgi:app
