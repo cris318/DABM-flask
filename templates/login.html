@@ -28,8 +28,7 @@
 <body style="background-image: url('/static/fondo2.png')">
     <div id="login">
         <form action="/menu" method="post" id="formLogin">
-            <img alt="Logo Escuela" height="147" src="https://escuelaing.s3.amazonaws.com/staging/images/logo-ecijg.width-380.png?AWSAccessKeyId=AKIAWFY3NGTFBJGCIWME&amp;Signature=C%2BBrM2TjbnUAse6%2FTkfIPKvgY98%3D&amp;Expires=1636470203" width="380">
-            
+            <img alt="Logo Escuela" height="147" src="{{ url_for('static', filename='logo.png') }}" width="380">
             <p class="parrafo">Usuario  : <input type="text" name="usuario" id="usuario"></p>
             <p class="parrafo">Contraseña : <input type="password" name="password" id="password"></p>
             <p><input type="button" class="boton" value="Ingresar" onclick="boton()"></p>
