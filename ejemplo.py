@@ -38,19 +38,26 @@ def Rango():
         maxNormal=request.form["maxNormal"] 
         minFiebre=request.form["minFiebre"]
         maxFiebre=request.form["maxFiebre"]
+        cambiarRangos(minHipo,maxHipo,minNormal,maxNormal,minFiebre,maxFiebre)
 
-        print(minHipo)
-        print(maxHipo)
-        #cambiarRangos(minHipo,maxHipo,minNormal,maxNormal,minFiebre,maxFiebre)
-        return minHipo + ";" + maxHipo
-def cambiarRangos():
-    pass
+        return render_template('menu.html')
+
+def cambiarRangos(minHipo,maxHipo,minNormal,maxNormal,minFiebre,maxFiebre):
+    directorio=os.path.dirname(__file__)        #se abre y lee el archivo de texto de "parametros.cvs"
+    nombrearchivo="bd/parametros.csv"
+    ruta=os.path.join(directorio,nombrearchivo)
+
+    f=open(ruta,"w")
+    datos="hipotermia"+";"+minHipo+";"+maxHipo+"\n"+"normal"+";"+minNormal+";"+maxNormal+"\n"+"fiebre"+";"+minFiebre+";"+maxFiebre+"\n"
+    f.write(datos)
+    f.close()
+
 @app.route('/monitor')
 def monitor():
     #consultar archivo de parametros
     datos=getDatos()
     # obtener lectura
-    lectura=random.randint(0,45)
+    lectura=random.randint(int(datos[0][1]),int(datos[2][2])) #se generan los valores aleatorios dentro del rango de parametros establecidos
     # enviar a la interfaz
     color=0
     if lectura >= int(datos[0][1]) and lectura <= int(datos[0][2]):

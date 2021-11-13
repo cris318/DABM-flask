@@ -18,7 +18,26 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <form action="/Rangos" method="post">
+    <script>
+        function buton(){
+            minH=document.getElementById("minH").value;
+            maxH=document.getElementById("maxH").value;
+            minN=document.getElementById("minN").value;
+            maxN=document.getElementById("maxN").value;
+            minF=document.getElementById("minF").value;
+            maxF=document.getElementById("maxF").value;
+            if ((minH=="") || (maxH=="") || (minN=="") || (maxN=="") || (minF=="") || (maxF=="") ){
+                alert("Ingrese todos los valores");                
+            }
+            else{
+                alert("Valores Establecidos")
+                document.getElementById("formLogin").submit();
+            }
+        }
+      
+    </script>
+
+    <form action="/Rangos" method="post" id="formLogin">
         <p><h4>PARAMETROS DE CONFIGURACION</h4></p>
             <br>
             <p>
@@ -33,24 +52,24 @@
                     <tbody>   
                         <tr class="table-primary">
                             <td>Hipotermia</td>
-                            <td><input type="number" placeholder="valor minimo" name="minHipo"></td>
-                            <td><input type="number" placeholder="valor maximo" name="maxHipo"></td>
+                            <td><input type="number" placeholder="valor minimo" name="minHipo" id="minH"></td>
+                            <td><input type="number" placeholder="valor maximo" name="maxHipo" id="maxH"></td>
                         </tr>
                         <tr class="table-success">
                             <td>Normal</td>
-                            <td><input type="number" placeholder="valor minimo" name="minNormal"></td>
-                            <td><input type="number" placeholder="valor maximo" name="maxNormal"></td>
+                            <td><input type="number" placeholder="valor minimo" name="minNormal" id="minN"></td>
+                            <td><input type="number" placeholder="valor maximo" name="maxNormal" id="maxN"></td>
                         </tr>
                         <tr class="table-danger">
                             <td>Fiebre</td>
-                            <td><input type="number" placeholder="valor minimo" name="minFiebre"></td>
-                            <td><input type="number" placeholder="valor maximo" name="maxFiebre"></td>
+                            <td><input type="number" placeholder="valor minimo" name="minFiebre" id="minF"></td>
+                            <td><input type="number" placeholder="valor maximo" name="maxFiebre" id="maxF"></td>
                         </tr>                
                     </tbody>
                 </table>
             </p>
     
-        <p><button class="btn btn-primary" type="submit" id="boton" >Guardar</button></p>
+        <p><button class="btn btn-primary" type="button" id="boton" onclick="buton()" >Guardar</button></p>
     </form>
 </body>
 </html>
