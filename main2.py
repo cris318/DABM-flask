@@ -57,17 +57,26 @@ def monitor():
     #consultar archivo de parametros
     datos=getDatos()
     # obtener lectura
-    lectura=random.randint(int(datos[0][1]),int(datos[2][2])) #se generan los valores aleatorios dentro del rango de parametros establecidos
+    
+    
+    lecturas=[]
+    for i in range(0,100):
+        lectura=random.randint(0,45)
+        lecturas.append(lectura)
+    #lectura=random.randint(int(datos[0][1]),int(datos[2][2])) #se generan los valores aleatorios dentro del rango de parametros establecidos
     # enviar a la interfaz
-    color=0
-    if lectura >= int(datos[0][1]) and lectura <= int(datos[0][2]):
-        color=1 
-    if lectura >= int(datos[1][1]) and lectura <= int(datos[1][2]):
-        color=2 
-    if lectura>= int(datos[2][1]) and lectura <= int(datos[2][2]):
-        color=3
-
-    return render_template("/monitor.html",datos=datos,lectura=lectura,color=color)
+    
+    colores=[]
+    for lectura in lecturas:
+        color=0
+        if lectura >= int(datos[0][1]) and lectura <= int(datos[0][2]):
+            color=1 
+        if lectura >= int(datos[1][1]) and lectura <= int(datos[1][2]):
+            color=2 
+        if lectura>= int(datos[2][1]) and lectura <= int(datos[2][2]):
+            color=3
+        colores.append(color)
+    return render_template("/monitor2.html",datos=datos,lecturas=lecturas,colores=colores)
         
 def verificar(usuario,password):
     directorio=os.path.dirname(__file__)        #se abre y lee el archivo de texto de "users.cvs"
@@ -87,6 +96,10 @@ def verificar(usuario,password):
         if ((d[0]==usuario) and (d[1]==password)):
             return True
 
+@app.route("/Rangos")
+def rangos():
+    pass
+    
 def getDatos():
     directorio=os.path.dirname(__file__)
     nombrearchivo="bd/parametros.csv"
